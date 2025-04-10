@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "seed": "node src/scripts/seedJobs.js",
+    "test-cors": "node test-cors.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
