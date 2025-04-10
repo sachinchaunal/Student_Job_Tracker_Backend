@@ -12,10 +12,20 @@ const jobRoutes = require('./routes/jobs');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Get allowed origins from environment or use defaults
+// Get allowed origins from environment variables or use defaults
+// Format for ALLOWED_ORIGINS env variable: comma-separated list of URLs
+// Example: "http://localhost:3000,https://my-app.vercel.app"
+const defaultOrigins = ['http://localhost:3000'];
+
+// Add production frontend URL if defined in environment
+if (process.env.FRONTEND_URL) {
+  defaultOrigins.push(process.env.FRONTEND_URL);
+}
+
+// Final list of allowed origins (from ALLOWED_ORIGINS env var or defaults)
 const allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(',') 
-  : ['http://localhost:3000', `'process.env.FRONTEND_ENV'`, 'https://student-job-tracker.vercel.app'];
+  : defaultOrigins;
 
 console.log('Configured allowed origins:', allowedOrigins);
 
